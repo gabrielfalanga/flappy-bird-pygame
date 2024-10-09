@@ -5,7 +5,7 @@ import random
 
 # constantes de tamanho da tela
 TELA_LARGURA = 500
-TELA_ALTURA = 800
+TELA_ALTURA = 700
 
 # constantes de imagens
 IMAGEM_CANO = pygame.transform.scale2x(pygame.image.load(os.path.join('imgs', 'pipe.png')))
@@ -26,8 +26,8 @@ class Passaro:
     # imagens do pássaro
     IMGS = IMAGENS_PASSARO
     # animações da rotação
-    ROTACAO_MAXIMA = 20
-    VELOCIDADE_ROTACAO = 20
+    ROTACAO_MAXIMA = 25
+    VELOCIDADE_ROTACAO = 15
     TEMPO_ANIMACAO = 4
 
     def __init__(self, x, y):
@@ -41,7 +41,7 @@ class Passaro:
         self.imagem = self.IMGS[0]
 
     def pular(self):
-        self.velocidade = -10.5
+        self.velocidade = -9
         self.tempo = 0
         self.altura = self.y
 
@@ -49,7 +49,7 @@ class Passaro:
         # calcular o deslocamento
         self.tempo += 1
         # fórmula do sorvetão
-        deslocamento = 1.5 * (self.tempo**2) + self.velocidade * self.tempo
+        deslocamento = 1.2 * (self.tempo**2) + self.velocidade * self.tempo
 
         # restringir o deslocamento
         if deslocamento > 16:
@@ -61,11 +61,11 @@ class Passaro:
         self.y += deslocamento
 
         # ângulo do pássaro
-        if deslocamento < 0 or self.y < (self.altura + 20):
+        if deslocamento < 0 or self.y < (self.altura - 45):
             if self.angulo < self.ROTACAO_MAXIMA:
                 self.angulo = self.ROTACAO_MAXIMA
         else:
-            if self.angulo > -90:
+            if self.angulo > -60:
                 self.angulo -= self.VELOCIDADE_ROTACAO
 
     def desenhar(self, tela):
